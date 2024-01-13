@@ -9,7 +9,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @Column(name = "role_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)

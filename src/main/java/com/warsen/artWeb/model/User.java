@@ -12,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
     @NotBlank
@@ -45,6 +45,12 @@ public class User {
     @Column(name = "token_expired")
     private boolean tokenExpired;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     @Column(name = "roles")
     private Set<Role> roles;
 
