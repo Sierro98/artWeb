@@ -19,6 +19,13 @@ public class userDto {
     private String email;
 
 
+    public userDto(String username, String password, String matchingPassword, String email) {
+        this.username = username;
+        this.password = password;
+        this.matchingPassword = matchingPassword;
+        this.email = email;
+    }
+
     public String getUsername() {
         return username;
     }
