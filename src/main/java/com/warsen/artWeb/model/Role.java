@@ -1,6 +1,6 @@
 package com.warsen.artWeb.model;
 
-import com.warsen.artWeb.util.UserRole;
+import com.warsen.artWeb.security.UserRole;
 import jakarta.persistence.*;
 
 @Entity

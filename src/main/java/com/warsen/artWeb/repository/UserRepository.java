@@ -1,7 +1,7 @@
 package com.warsen.artWeb.repository;
 
 import com.warsen.artWeb.model.User;
-import com.warsen.artWeb.util.UserRole;
+import com.warsen.artWeb.security.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
