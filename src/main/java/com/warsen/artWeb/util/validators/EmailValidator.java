@@ -19,8 +19,7 @@ public class EmailValidator
         (.[A-Za-z]{2,})$
         """;
     @Override
-    public void initialize(ValidEmail constraintAnnotation) {
-    }
+    public void initialize(ValidEmail constraintAnnotation) {}
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context){
         return (validateEmail(email));

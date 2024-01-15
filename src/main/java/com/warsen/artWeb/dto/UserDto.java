@@ -1,10 +1,13 @@
 package com.warsen.artWeb.dto;
 
 
+import com.warsen.artWeb.util.anotations.PasswordMatches;
+import com.warsen.artWeb.util.anotations.ValidEmail;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class userDto {
+@PasswordMatches
+public class UserDto {
     @NotNull
     @NotEmpty
     private String username;
@@ -16,10 +19,11 @@ public class userDto {
 
     @NotNull
     @NotEmpty
+    @ValidEmail
     private String email;
 
 
-    public userDto(String username, String password, String matchingPassword, String email) {
+    public UserDto(String username, String password, String matchingPassword, String email) {
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
