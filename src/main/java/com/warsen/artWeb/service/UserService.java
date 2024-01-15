@@ -23,6 +23,7 @@ public class UserService(UserRepository repository) implements IUserService {
         }
 
         // the rest of the registration operation
+        return null;
     }
     private boolean emailExists(String email) {
         return userRepository.findByEmail(email).isPresent();
