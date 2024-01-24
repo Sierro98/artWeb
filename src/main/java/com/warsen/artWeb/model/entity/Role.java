@@ -1,10 +1,10 @@
-package com.warsen.artWeb.model;
+package com.warsen.artWeb.model.entity;
 
 import com.warsen.artWeb.security.UserRole;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
 
     @Id
@@ -12,8 +12,7 @@ public class Role {
     @Column(name = "role_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20, name = "name")
+    @Column(name = "name")
     private UserRole name;
 
     public Role(Long id, UserRole name) {

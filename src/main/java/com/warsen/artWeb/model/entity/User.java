@@ -1,13 +1,15 @@
-package com.warsen.artWeb.model;
+package com.warsen.artWeb.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.LazyCollection;
+
 
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,48 +18,41 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Column(name = "username")
+    @Column(nullable = false, unique = true, name = "username")
     private String username;
 
     @NotBlank
-    @Column(name = "password")
+    @Column(nullable = false, name = "password")
     private String password;
 
     @NotBlank
-    @Column(name = "email")
+    @Column(nullable = false, unique = true, name = "email")
     private String email;
 
     @Column(name = "follower_number")
     private String followerNumber;
 
-    @Column(name = "created_at")
+    @Column(nullable = false, name = "created_at")
     private Date createdAt;
 
-    @Column(name = "last_login")
+    @Column(nullable = false, name = "last_login")
     private Date lasLogin;
 
-    @Column(name = "total_post")
+    @Column(nullable = false, name = "total_post")
     private Long totalPost;
 
-    @Column(name = "enabled")
+    @Column(nullable = false, name = "enabled")
     private boolean enabled;
 
-    @Column(name = "token_expired")
-    private boolean tokenExpired;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @ManyToMany
     @Column(name = "roles")
     private Set<Role> roles;
 
     public User(Long id, String username, String password,
                 String email, String followerNumber, Date createdAt,
                 Date lasLogin, Long totalPost, boolean enabled,
-                boolean tokenExpired, Set<Role> roles) {
+                Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -67,7 +62,6 @@ public class User {
         this.lasLogin = lasLogin;
         this.totalPost = totalPost;
         this.enabled = enabled;
-        this.tokenExpired = tokenExpired;
         this.roles = roles;
     }
 
@@ -141,14 +135,6 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public boolean isTokenExpired() {
-        return tokenExpired;
-    }
-
-    public void setTokenExpired(boolean tokenExpired) {
-        this.tokenExpired = tokenExpired;
     }
 
     public Set<Role> getRoles() {
