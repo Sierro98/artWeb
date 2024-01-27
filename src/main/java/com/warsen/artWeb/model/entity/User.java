@@ -2,15 +2,15 @@ package com.warsen.artWeb.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.annotations.LazyCollection;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -49,10 +49,32 @@ public class User {
     @Column(name = "roles")
     private Set<Role> roles;
 
-    public User(Long id, String username, String password,
-                String email, String followerNumber, Date createdAt,
-                Date lasLogin, Long totalPost, boolean enabled,
-                Set<Role> roles) {
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName().toString()));
+        }
+        return authorities;
+    }
+
+    public User(Long id, String username, String password, String email, String followerNumber, Date createdAt,
+                Date lasLogin, Long totalPost, boolean enabled, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -65,12 +87,11 @@ public class User {
         this.roles = roles;
     }
 
-    public Long getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {
