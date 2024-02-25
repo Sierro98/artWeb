@@ -6,10 +6,11 @@ import com.warsen.artWeb.util.anotations.ValidEmail;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Objects;
+
 @PasswordMatches
 public class UserDto {
-    @NotNull
-    @NotEmpty
+
     private String username;
 
     @NotNull
@@ -46,4 +47,26 @@ public class UserDto {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", matchingPassword='" + matchingPassword + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(username, userDto.username) && Objects.equals(password, userDto.password) && Objects.equals(matchingPassword, userDto.matchingPassword) && Objects.equals(email, userDto.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password, matchingPassword, email);
+    }
 }
