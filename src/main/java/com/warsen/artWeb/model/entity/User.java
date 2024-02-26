@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "follower_number")
-    private String followerNumber;
+    private Long followerNumber;
 
     @Column(nullable = false, name = "created_at")
     private Date createdAt;
@@ -73,9 +73,8 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public User(Long id, String username, String password, String email, String followerNumber, Date createdAt,
+    public User(String username, String password, String email, Long followerNumber, Date createdAt,
                 Date lasLogin, Long totalPost, boolean enabled, Set<Role> roles) {
-        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -119,11 +118,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getFollowerNumber() {
+    public Long getFollowerNumber() {
         return followerNumber;
     }
 
-    public void setFollowerNumber(String followerNumber) {
+    public void setFollowerNumber(Long followerNumber) {
         this.followerNumber = followerNumber;
     }
 

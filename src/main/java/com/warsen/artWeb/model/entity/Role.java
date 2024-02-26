@@ -1,6 +1,6 @@
 package com.warsen.artWeb.model.entity;
 
-import com.warsen.artWeb.security.UserRole;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,10 +13,9 @@ public class Role {
     private Long id;
 
     @Column(name = "name")
-    private UserRole name;
+    private String name;
 
-    public Role(Long id, UserRole name) {
-        this.id = id;
+    public Role(String name) {
         this.name = name;
     }
 
@@ -24,15 +23,11 @@ public class Role {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UserRole getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(UserRole name) {
+    public void setName(String name) {
         this.name = name;
     }
 }
